@@ -14,6 +14,5 @@
 
 	<import resource="classpath:/spring/spring-context.xml"/>
 	
-	<import resource="classpath:/spring/spring-security-context.xml"/>
 
 </beans>
