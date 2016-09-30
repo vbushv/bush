@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BusinessManager_sqlMap" >
+
+<select id="getBusinessList" parameterType="hashMap" resultType="vo.BusinessManagerVO">
+	select T.* FROM(
+	 select A.* , ROWNUM AS rnum FROM(
+	 		SELECT *
+	 		FROM business_manager
+	 		WHERE 1 = 1
+	 			<if test="co_name != null">
+	 				AND co_name like '%' || #{co_name} || '%'
+	 			</if>
+	 		order by co_reg_date desc
+	  	)A
+	)T 
+	WHERE rnum BETWEEN #{startNum} and #{endNum}
+</select>
+
+<select id="getBusinessView" parameterType="java.lang.String" resultType="vo.BusinessManagerVO">
+	select * 
+	from business_manager
+	where co_id = #{co_id}
+</select>
+
+<select id="getBusinessTotalCount" parameterType="hashMap" resultType="java.lang.Integer">
+	select count(*)
+	from business_manager
+	where 1 = 1
+		<if test="co_name != null">
+		and co_name like '%' || #{co_name} || '%'
+		</if>
+</select>
+
+<insert id="addBusiness" parameterType="vo.BusinessManagerVO">
+	INSERT INTO 
+	business_manager(co_id, co_name, co_postcode, co_address1, co_address2, co_etc, co_call, co_reg_date) 
+	VALUES (
+	#{co_id, jdbcType=VARCHAR}, 
+	#{co_name, jdbcType=VARCHAR}, 
+	#{co_postcode, jdbcType=VARCHAR}, 
+	#{co_address1, jdbcType=VARCHAR}, 
+	#{co_address2, jdbcType=VARCHAR}, 
+	#{co_etc, jdbcType=CLOB}, 
+	#{co_call, jdbcType=VARCHAR}, 
+	sysdate )
+
+</insert>
+
+<update id="getBusinessUpdate" parameterType="vo.BusinessManagerVO">
+	UPDATE business_manager
+	SET co_name = #{co_name}, 
+		co_postcode = #{co_postcode},
+		co_address1 = #{co_address1},
+		co_address2 = #{co_address2},
+		co_etc = #{co_etc},
+		co_call = #{co_call},
+		co_reg_date = sysdate
+	where co_id = #{co_id}	
+
+</update>
+
+<delete id="deleteBusiness" parameterType="java.lang.String">
+	
+	DELETE
+	FROM business_manager
+	where co_id = #{co_id}
+	
+</delete>
+
+<select id="getZipCode" parameterType="java.lang.String" resultType="vo.ZipCode">
+	SELECT 
+		zipcode, zipnum, sido, gugun, dong, ri, bunji, building,
+		sido ||' '|| gugun ||' '|| dong ||' '|| ri  AS totalAddress
+	FROM ZIPCODE
+	WHERE 1 = 1
+		<if test="dong !=null">
+		AND dong like #{dong} || '%'
+		</if>
+	  order by zipcode asc	
+
+</select>
+
+</mapper>

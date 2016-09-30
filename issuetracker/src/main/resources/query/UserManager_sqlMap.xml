@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserManager_sqlMap" >
+
+<select id="getUserList" parameterType="hashMap" resultType="vo.UserManagerVO">
+	SELECT T.* FROM(	
+	    SELECT A.*, ROWNUM AS rnum FROM(
+			SELECT *
+			FROM user_manager
+			WHERE 1 = 1
+			<if test="IdSearch != null">
+				AND user_id LIKE '%' || #{IdSearch} || '%'
+			</if>
+			<if test="NameSearch != null">
+				AND user_name LIKE '%' || #{NameSearch} || '%'
+			</if>			
+			ORDER BY user_reg_date desc
+			) A
+	    ) T
+	WHERE rnum BETWEEN #{startNum} and #{endNum}
+</select>
+
+<select id="getUserTotalCount" parameterType="hashMap" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM user_manager
+	WHERE 1 = 1
+	<if test="IdSearch != null">
+		AND user_id LIKE '%' || #{IdSearch} || '%'
+	</if>
+	<if test="NameSearch != null">
+		AND user_name LIKE '%' || #{NameSearch} || '%'
+	</if>	
+</select>
+
+<select id="getPwdByUserId" parameterType="java.lang.String" resultType="hashMap">
+	SELECT user_id, user_name, user_pass 
+	FROM user_manager
+	WHERE user_id = #{userId}
+</select>
+
+<select id="getUserView" parameterType="java.lang.String" resultType="vo.UserManagerVO">
+	SELECT *
+	FROM user_manager
+	WHERE user_id = #{userId}
+</select>
+
+<insert id="addUser" parameterType="vo.UserManagerVO">
+	INSERT INTO
+	user_manager(user_id, user_name, user_company, user_pass, user_authority, user_ps_call, user_co_call, user_email, user_etc, user_reg_date)
+	VALUES(#{user_id}, #{user_name}, #{user_company}, #{user_pass}, #{user_authority}, #{user_ps_call}, #{user_co_call}, #{user_email}, #{user_etc}, sysdate)
+</insert>
+
+<update id="editUser" parameterType="vo.UserManagerVO">
+	UPDATE user_manager SET
+		user_name = #{user_name},
+		user_company = #{user_company},
+		user_pass = #{user_pass},
+		user_authority = #{user_authority},
+		user_ps_call = #{user_ps_call},
+		user_co_call = #{user_co_call},
+		user_email = #{user_email},
+		user_etc = #{user_etc}
+	WHERE user_id = #{user_id}
+</update>
+
+<delete id="deleteUser" parameterType="java.lang.String">
+	DELETE FROM user_manager WHERE user_id = #{userId}
+</delete>
+
+</mapper>
