@@ -8,10 +8,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="userManagerDAO" class="dao.UserManagerDAOImpl" />
-	<bean id="customerManagerDAO" class="dao.CustomerManagerDAOImpl" />	
-	<bean id="businessManagerDAO" class="dao.BusinessManagerDAOImpl" />
-	<bean id="projectManagerDAO" class="dao.ProjectManagerDAOImpl" />
-	<bean id="serviceManagerDAO" class="dao.ServiceManagerDAOImpl" />
+	<!-- <bean id="serviceManagerDAO" class="dao.ServiceManagerDAOImpl" /> -->
 
 </beans>

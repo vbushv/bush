@@ -10,7 +10,7 @@
 <!-- 어노테이션 사용 설정 -->
 	<context:annotation-config />
 
-	<import resource="classpath:/mybatis/mybatis-context.xml"/>
+	<!-- <import resource="classpath:/mybatis/mybatis-context.xml"/> -->
 
 	<import resource="classpath:/spring/spring-context.xml"/>
 	

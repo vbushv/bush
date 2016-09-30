@@ -19,4 +19,3 @@ public class HellWorldController {
 		return "helloWorld";
 	}	
 }
-/*RedirectAttributes redirectAttributes*/
