@@ -8,11 +8,11 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
   
 <!-- 어노테이션 사용 설정 -->
-	<context:annotation-config />
+	<context:annotation-config /> <!-- @ㅇ같은거 쓸수있게 -->
 
 	<!-- <import resource="classpath:/mybatis/mybatis-context.xml"/> -->
 
-	<import resource="classpath:/spring/spring-context.xml"/>
+	<import resource="classpath:/spring/spring-context.xml"/> <!-- 여기에 실제 설정이 있음 원래 여기다가 만들어도 되는데 너무 길어지니까 나눠준거예요 -->
 	
 
 </beans>

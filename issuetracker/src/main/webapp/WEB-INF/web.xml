@@ -7,16 +7,16 @@
 
 	<context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        <param-value>/WEB-INF/spring-servlet.xml</param-value><!-- 스프링설정들이 여기 있음  -->
     </context-param>
 
  	<servlet>
 		<servlet-name>spring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> <!-- 서블릿 지정 서블릿 이름이 몰까요? 디스패쳐서블릿 -->
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.do</url-pattern> <!-- 이건 url 그러니까 url 주소들 있죠 뒤에 .do 확장명 보이죠? .do으로 접근해오면 여기서 필터링해서 spring으로 보내주고 -->
 	</servlet-mapping>
 
 	<filter>
@@ -24,29 +24,29 @@
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
+			<param-value>UTF-8</param-value><!-- 이건 그냥 UTF-8 으로 전체지정해주는거 -->
 		</init-param>
 	</filter>
 	
 	<filter-mapping>
 		<filter-name>Set Character Encoding</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/*</url-pattern> <!-- 그러면 UTF-8를 어떻게 가로채느냐? /* 이건 루트로 접근해오는 모든~~~ 전부다~~~ 가로챈다는 의미 -->
 	</filter-mapping>
 
 	<listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> <!-- 그냥 필수  -->
     </listener>
 	<listener>
-    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> <!-- 그냥필수 -->
   	</listener>
 
  	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> <!-- 로그설정리스너  -->
 	</listener>
 
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>classpath:config/log4j.properties</param-value>
+		<param-value>classpath:config/log4j.properties</param-value> <!-- 로그 설정파일 위치 -->
 	</context-param>
-
+<!--  -->
 </web-app>
