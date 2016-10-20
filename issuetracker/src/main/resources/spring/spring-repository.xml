@@ -8,10 +8,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="userManagerDAO" class="dao.UserManagerDAOImpl" />
-	<bean id="customerManagerDAO" class="dao.CustomerManagerDAOImpl" />	
-	<bean id="businessManagerDAO" class="dao.BusinessManagerDAOImpl" />
-	<bean id="projectManagerDAO" class="dao.ProjectManagerDAOImpl" />
-	<bean id="serviceManagerDAO" class="dao.ServiceManagerDAOImpl" />
+	<!-- <bean id="serviceManagerDAO" class="dao.ServiceManagerDAOImpl" /> -->
+	
+	<bean id="dao" class="dao.HelloDao" /> <!-- dao.HelloDao클래스(풀패키지로 적어줘야함) 를 dao 빈으로 등록해주겠다는 의미  -->
+	<bean id="blueDao" class="dao.BlueDao" />
 
 </beans>
